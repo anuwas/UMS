@@ -2,7 +2,8 @@
 .easy-tree {
     min-height: 20px;
     margin-bottom: 20px;
-    background-color: #e56155;
+    /*background-color: #e56155;*/
+    background-color:#008cba;
     color: #fff;
     border: none;
     border-top: none;

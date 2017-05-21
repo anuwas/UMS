@@ -14,11 +14,14 @@ class CustomButtonWidget extends  Widget{
 		parent::init();
 		$session=\Yii::$app->session;
 		$rolearr=array();
-		foreach ($session['loggedUser']->umsUserRoleMaps as $values){
-			array_push($rolearr, $values->role_id);
+		if(isset($session['loggedUser'])){
+			foreach ($session['loggedUser']->umsUserRoleMaps as $values){
+				array_push($rolearr, $values->role_id);
+			}
 		}
-		echo $this->type;
-		echo $this->cssclass;
+		
+		//echo $this->type;
+		//echo $this->cssclass;
 		if ($this->button=== 'submit') {
 			
 			$this->type=$_SERVER['REQUEST_URI'];

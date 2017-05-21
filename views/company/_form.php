@@ -3,13 +3,14 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use app\components\CompanyAccessComp;
 use app\models\Company;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Company */
 /* @var $form yii\widgets\ActiveForm */
 
-$dataCategory=ArrayHelper::map(Company::find()->where(['!=', 'sys_company_id', '1'])->asArray()->all(), 'sys_company_id', 'company_name');
+$dataCategory=ArrayHelper::map(Company::find()->where(['sys_company_id'=>CompanyAccessComp::getCompanyAccess()])->asArray()->all(), 'sys_company_id', 'company_name');
 
 ?>
 
@@ -18,7 +19,7 @@ $dataCategory=ArrayHelper::map(Company::find()->where(['!=', 'sys_company_id', '
     	<?php $form = ActiveForm::begin(); ?>
 		<section class="panel">	
 				<div class="panel-body">
-				<?= $form->field($model, 'parent_sys_company_id')->dropDownList($dataCategory,['prompt'=>'Root']) ?>
+				<?= $form->field($model, 'parent_sys_company_id')->dropDownList($dataCategory) ?>
         		<?= $form->field($model, 'company_name')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'label_name')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'custom_label')->textInput(['maxlength' => true]) ?>

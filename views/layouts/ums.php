@@ -55,7 +55,7 @@ if(!isset($session['loggedUser'])){
 					<img src="<?php echo Yii::getAlias('@web').'/web/assets/'?>/images/!logged-user.png" alt="Admin" class="img-circle" data-lock-picture="assets/images/!logged-user.png" />	
                    </figure>
 					<div class="profile-info" data-lock-name="Administrator" data-lock-email="<?php echo 'ADMIN_EMAIL';?>">
-								<span class="name"><?php echo 'Administrator';?></span>
+								<span class="name"><?php echo $session['loggedUser']->username;?></span>
 								<span class="role"></span></div>
 					  <i class="fa custom-caret"></i></a>
 					 <div class="dropdown-menu">

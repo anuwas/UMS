@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\components\CompanyAccessComp;
 use app\models\UmsUser;
 
 /**
@@ -18,8 +19,8 @@ class UmsUserSearch extends UmsUser
     public function rules()
     {
         return [
-            [['user_id', 'user_type', 'user_status', 'user_created_by', 'user_updated_by'], 'integer'],
-            [['user_access_key', 'username', 'password', 'additional_id', 'first_name', 'last_name', 'email_id', 'user_creation_stamp', 'user_updated_stamp'], 'safe'],
+            [['user_id', 'user_type', 'user_status', 'additional_id', 'user_created_by', 'user_updated_by'], 'integer'],
+            [['user_access_key', 'username', 'password', 'first_name', 'last_name', 'email_id', 'user_creation_stamp', 'user_updated_stamp'], 'safe'],
         ];
     }
 
@@ -62,6 +63,7 @@ class UmsUserSearch extends UmsUser
             'user_id' => $this->user_id,
             'user_type' => $this->user_type,
             'user_status' => $this->user_status,
+            'additional_id' => $this->additional_id,
             'user_creation_stamp' => $this->user_creation_stamp,
             'user_created_by' => $this->user_created_by,
             'user_updated_stamp' => $this->user_updated_stamp,
@@ -71,11 +73,11 @@ class UmsUserSearch extends UmsUser
         $query->andFilterWhere(['like', 'user_access_key', $this->user_access_key])
             ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'additional_id', $this->additional_id])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
             ->andFilterWhere(['like', 'last_name', $this->last_name])
             ->andFilterWhere(['like', 'email_id', $this->email_id]);
 
+            $query->andWhere(['additional_id'=>CompanyAccessComp::getCompanyAccess()]);
         return $dataProvider;
     }
 }

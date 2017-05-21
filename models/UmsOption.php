@@ -7,25 +7,26 @@ use Yii;
 /**
  * This is the model class for table "ums_option".
  *
- * @property integer $option_id
- * @property string $option_name
- * @property string $option_description
- * @property integer $option_type
- * @property integer $option_area
- * @property integer $option_status
- * @property string $option_link
- * @property string $option_icon
- * @property integer $option_order
- * @property integer $parent_option_id
- * @property integer $enable_toolbox
- * @property string $object_reference_key
- * @property integer $level
- * @property string $icon_class
- * @property integer $add_data
- * @property integer $edit_data
- * @property integer $delete_data
- * @property integer $view_data
- *
+ 
+  * @property integer $option_id
+  * @property string $option_name
+  * @property string $option_description
+  * @property integer $option_type
+  * @property integer $option_area
+  * @property integer $option_status
+  * @property string $option_link
+  * @property string $option_icon
+  * @property integer $option_order
+  * @property integer $parent_option_id
+  * @property integer $enable_toolbox
+  * @property string $object_reference_key
+  * @property integer $level
+  * @property string $icon_class
+  * @property integer $add_data
+  * @property integer $edit_data
+  * @property integer $delete_data
+  * @property integer $view_data
+  *
  * @property UmsRoleOptionMap[] $umsRoleOptionMaps
  */
 class UmsOption extends \yii\db\ActiveRecord

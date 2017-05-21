@@ -14,7 +14,7 @@ use yii\filters\VerbFilter;
  */
 class UmsroleController extends Controller
 {
-	
+	public $layout = 'ums';
     /**
      * @inheritdoc
      */
@@ -36,7 +36,7 @@ class UmsroleController extends Controller
      */
     public function actionIndex()
     {
-    	$this->layout='ums';
+    	
         $searchModel = new UmsRoleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

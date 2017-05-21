@@ -39,6 +39,8 @@ public $layout = 'ums';
         $searchModel = new UmsRoleOptionMapSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $dataProvider->pagination->pageSize=100;
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

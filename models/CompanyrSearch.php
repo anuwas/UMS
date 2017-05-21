@@ -6,6 +6,8 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Company;
+use app\components\CompanyAccessComp;
+use app\components\UtilComp;
 
 /**
  * CompanyrSearch represents the model behind the search form about `app\models\Company`.
@@ -41,6 +43,8 @@ class CompanyrSearch extends Company
      */
     public function search($params)
     {
+        
+    	
         $query = Company::find();
 
         // add conditions that should always apply here
@@ -73,6 +77,9 @@ class CompanyrSearch extends Company
         $query->andFilterWhere(['like', 'company_name', $this->company_name])
             ->andFilterWhere(['like', 'label_name', $this->label_name])
             ->andFilterWhere(['like', 'custom_label', $this->custom_label]);
+        
+            $query->andWhere(['sys_company_id'=>CompanyAccessComp::getCompanyAccess()]);
+        
 
         return $dataProvider;
     }

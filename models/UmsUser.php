@@ -14,7 +14,7 @@ use Yii;
   * @property string $password
   * @property integer $user_type
   * @property integer $user_status
-  * @property string $additional_id
+  * @property integer $additional_id
   * @property string $first_name
   * @property string $last_name
   * @property string $email_id
@@ -44,13 +44,13 @@ class UmsUser extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_access_key', 'username', 'password', 'user_type', 'user_status', 'first_name', 'last_name', 'user_creation_stamp', 'user_updated_stamp'], 'required'],
-            [['user_type', 'user_status', 'user_created_by', 'user_updated_by'], 'integer'],
+            [['user_access_key', 'username', 'password', 'user_type', 'user_status', 'additional_id', 'first_name', 'last_name', 'user_creation_stamp', 'user_updated_stamp'], 'required'],
+            [['user_type', 'user_status', 'additional_id', 'user_created_by', 'user_updated_by'], 'integer'],
             [['user_creation_stamp', 'user_updated_stamp'], 'safe'],
             [['user_access_key', 'username'], 'string', 'max' => 50],
             [['password'], 'string', 'max' => 90],
-            [['additional_id', 'email_id'], 'string', 'max' => 100],
             [['first_name', 'last_name'], 'string', 'max' => 255],
+            [['email_id'], 'string', 'max' => 100],
             [['user_access_key'], 'unique'],
         ];
     }

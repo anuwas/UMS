@@ -11,18 +11,22 @@ class CompanyTreeWidget extends Widget
 	public $companyoptions;
 	
 	public function init(){
-		
-		$detailcompany= Company::find()->all();
-		$this->companyoptions=$detailcompany;
-		$paired=$this->generatePair($detailcompany);
-		$result=$this->parseTree($paired);
-		$this->message=$this->printTree($result); 
+	    $detailcompany= Company::find()->where(['sys_company_id'=>CompanyAccessComp::getCompanyAccess()])->all();
+	    
+	    if(count($detailcompany)>1){
+	        $this->companyoptions=$detailcompany;
+	        $paired=$this->generatePair($detailcompany);
+	        $result=$this->parseTree($paired);
+	        $this->message=$this->printTree($result); 
+	    }else{
+	        $this->message=$this->printSinleNode($detailcompany);
+	    }
 		
 		
 		
 		parent::init();
 		if($this->message===null) {
-			$this->message= array();
+			$this->message= '';
 		}else{
 			$this->message=$this->message;
 		}
@@ -65,6 +69,8 @@ class CompanyTreeWidget extends Widget
 		return empty($return) ? null : $return;
 	}
 	
+	
+	
 	 /* private function printTree($tree) {
 	
 	if(!is_null($tree) && count($tree) > 0) {
@@ -98,6 +104,15 @@ class CompanyTreeWidget extends Widget
 		
 		return $this->str;
 	}   
+	
+	
+	private function printSinleNode($tree)
+	{
+	    $this->str='<ul>';
+	    $this->str .='<li id="company_node_'.$tree[0]->company_name.'">'.$tree[0]->company_name.'</li>';
+	    $this->str.='</ul>';
+	    return $this->str;
+	}
 	
 
 	

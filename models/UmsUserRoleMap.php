@@ -7,10 +7,11 @@ use Yii;
 /**
  * This is the model class for table "ums_user_role_map".
  *
- * @property integer $ums_user_role_map_id
- * @property integer $user_id
- * @property integer $role_id
- *
+ 
+  * @property integer $ums_user_role_map_id
+  * @property integer $user_id
+  * @property integer $role_id
+  *
  * @property UmsUser $user
  * @property UmsRole $role
  */
