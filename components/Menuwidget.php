@@ -34,7 +34,7 @@ class Menuwidget extends Widget
 		
 		parent::init();
 		if($this->message===null) {
-			$this->message= array();
+			$this->message= null;
 		}else{
 			$this->message=$this->message;
 		}

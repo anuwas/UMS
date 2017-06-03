@@ -18,7 +18,8 @@ class LoginAsset extends AssetBundle
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
-			'http://peopleproconsultants.com/ppltech/ums/css/bootstrap.min.css',
+	        'assets/stylesheets/pplloginbootstrap.min.css',
+			//'http://peopleproconsultants.com/ppltech/ums/css/bootstrap.min.css',
 			'http://peopleproconsultants.com/ppltech/ums/css/bootstrap-select.min.css',
 			'http://peopleproconsultants.com/ppltech/ums/css/bootstrap-toggle.min.css',
 			'http://peopleproconsultants.com/ppltech/ums/css/jquery-ui.min.css',

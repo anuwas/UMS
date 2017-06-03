@@ -15,7 +15,7 @@ $companies=ArrayHelper::map(Company::find()->where('sys_company_id>='.UtilComp::
 						
 						<div class="col-md-12">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 <section class="panel">
 									
 									<div class="panel-body">
@@ -34,7 +34,7 @@ $companies=ArrayHelper::map(Company::find()->where('sys_company_id>='.UtilComp::
                 <?= $form->field($model, 'employee_dob')->textInput() ?>
 
         
-                <?= $form->field($model, 'employee_photo_img')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'employee_photo_img')->fileInput(['maxlength' => true]) ?>
 
         
                 <?= $form->field($model, 'Address')->textarea(['rows' => 6]) ?>

@@ -10,6 +10,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\UmsUser;
 use yii\web\Session;
+use app\models\Company;
 
 class SiteController extends Controller
 {
@@ -66,10 +67,11 @@ class SiteController extends Controller
     	$model = new UmsUser();
     	
     	if ($model->load(Yii::$app->request->post())) {
-    		if($this->loginCheck($model->username,$model->password)){
+    	    if($this->loginCheck($model->username,$model->password,Yii::$app->request->post('companyname'))){
     			return $this->redirect(Yii::$app->request->baseUrl.'/dashboard');
     		}else{
-    			return $this->redirect('Yii::$app->request->baseUrl');
+    		    
+    			return $this->redirect(Yii::$app->request->baseUrl.'?er=1');
     		}
     	} else {
     		return $this->render('index');
@@ -77,18 +79,24 @@ class SiteController extends Controller
         
     }
     
-    private function loginCheck($usernae,$password){
-    	$model=UmsUser::find()->joinWith('umsUserRoleMaps')->where(['username'=>$usernae])->one();
-    	if($model!=''){
-    		if($model->password==md5($password)){
-    			$session = new Session();
-    			$session->open();
-    			$session['loggedUser']=$model;
-    			return true;
-    		}
-    	}else{
-    		return false;
-    	}
+    private function loginCheck($usernae,$password,$companyname){
+        $company=Company::findOne(['company_name'=>$companyname]);
+        if($company){
+            $companyId=$company->sys_company_id;
+            $model=UmsUser::find()->joinWith('umsUserRoleMaps')->where(['username'=>$usernae,'additional_id'=>$companyId])->one();
+            if($model!=''){
+                if($model->password==md5($password)){
+                    $session = new Session();
+                    $session->open();
+                    $session['loggedUser']=$model;
+                    return true;
+                }
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 
     

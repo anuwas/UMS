@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\components\PplemployeesComp;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
 
 /**
  * PplemployeesController implements the CRUD actions for PplEmployees model.
@@ -66,12 +68,21 @@ public $layout = 'ums';
   	public function actionCreate()
     {
         $model = new PplEmployees();
-
+        $uploadform = new UploadForm();
+        
         if ($model->load(Yii::$app->request->post())) {
-        	$pplcomp = new PplemployeesComp();
+            $uploadedfile = UploadedFile::getInstances($uploadform, 'employee_photo_img');
+            if($uploadedfile){
+                
+                $model->employee_photo_img=$uploadedfile;
+                $filename=$uploadform->upload();
+                $model->filename=$filename;
+            }
+        	/* $pplcomp = new PplemployeesComp();
         	if($pplcomp->create($model)){
         		return $this->redirect(['view', 'id' => $model->sys_employee_id]);
-        	}
+        	} */
+            
         } else {
             return $this->render('create', [
                 'model' => $model,

@@ -9,17 +9,30 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="panel panel-info main-login-sec">
 	<div class="panel-heading">Log in to HR & PAYROLL Management System</div>
+	<?php 
+	if(isset($_REQUEST['er'])==1)
+	{?>
+	<div class="panel-heading"><span style="color: red;font-size: 20">Invalid Credential</span></div>
+	<?php 
+	
+	}
+	?>
 	<div class="panel-body">
 		<?php $form = ActiveForm::begin(); ?>
 		<div class="login-form">
+		<div class="input-box input-left">
+			<label for="username">Company Name:</label><br>
+			<input type="text" id="companyname"  name="companyname" class="required-entry form-control"  />
+		    </div>
+		    
 		    <div class="input-box input-left">
 			<label for="username">User Name:</label><br>
 			<input type="text" id="umsuser-username"  name="UmsUser[username]" class="required-entry form-control"  />
 		    </div> 
 		    
-		    <div class="input-box input-right">
+		    <div class="input-box input-left">
 			<label for="password">Password:</label><br>
-			<input type="password" id="umsuser-password" class="form-control" name="UmsUser[password]" class="required-entry form-control"  />
+			<input type="password" id="umsuser-password"  name="UmsUser[password]" class="required-entry form-control"  />
 		    </div>
 		    <div class="clear"></div>
 		    <div class="form-buttons">
